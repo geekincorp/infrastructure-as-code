@@ -1,0 +1,90 @@
+{
+  "variables": {
+    "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "atlas_username": "{{env `ATLAS_USERNAME`}}",
+    "region"        : "{{env `AWS_DEFAULT_REGION`}}",
+    "atlas_token"   : "{{env `ATLAS_TOKEN`}}",
+    "iam_instance_profile":"Packer-S3-Profile",
+    "aws_ami_name" : "Ubuntu16lts dockerhost base",
+    "source_ami"   : "",
+    "instance_type": "t2.micro",
+    "aws_ssh_username": "deployer",
+    "aws_ssh_keypair_name": "deployer",
+    "aws_ssh_private_key_file": "../../../ssh/deployer.pem",
+    "aws_ami_description": "Ubuntu 16.04LTS dockerhost Image",
+    "scripts_dir": "scripts",
+    "install_script": "/ubuntu/install/docker_engine_compose_install.sh",
+    "packer_build_number" : "{{isotime \"01022006:(15)\"}}",    
+    "packer_build_date": "{{isotime \"2006-01-02 (15):04\"}}",
+    "ami_tag_service"  : "container-host",
+    "ami_tag_os": "ubuntu 16.04 lts x64",
+    "ami_tag_source": "Packer",
+    "atlas_artifact_type": "amazon.image",
+    "atlas_build_version": "",
+    "atlas_artifact_name": "aws-ubuntu16lts-dockerhost"
+  },
+  "builders": [
+    {
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "iam_instance_profile": "{{user `iam_instance_profile`}}",
+    "region"    : "{{user `region`}}",
+    "source_ami_filter": {
+      "filters": {
+        "virtualization-type": "hvm",
+        "name": "Ubuntu16lts Foundation",
+        "root-device-type": "ebs"
+      },
+      "owners": ["048362944768"],
+      "most_recent": true
+    },
+    "instance_type": "{{user `instance_type`}}",
+    "ssh_username" : "{{user `aws_ssh_username`}}",
+    "ssh_keypair_name": "{{user `aws_ssh_keypair_name`}}",
+    "ssh_private_key_file": "{{user `aws_ssh_private_key_file`}}",
+    "ssh_timeout"  : "15m",
+    "force_deregister": "true",
+    "force_delete_snapshot": "true",
+    "ami_name": "{{user `aws_ami_name`}}",
+    "ami_description": "{{user `aws_ami_description`}}",
+    "associate_public_ip_address": "true",
+    "tags": {
+        "Name"   : "{{user `aws_ami_name`}}",
+        "Service": "{{user `ami_tag_service`}}",
+        "OS"     : "{{user `ami_tag_os`}}",
+        "Source" : "{{user `ami_tag_source`}}",
+        "Build Version": "{{user `atlas_build_version`}}",
+        "Date"   : "{{user `packer_build_date`}}"
+        }
+    }
+  ],
+  "provisioners": [
+    {
+    "type"  : "shell",
+    "execute_command": "echo {{user `ssh_username`}} | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
+    "inline": [
+      "sudo DEBIAN_FRONTEND=noninteractive apt-get -y update",
+      "sudo DEBIAN_FRONTEND=noninteractive apt-get -y upgrade"
+      ]
+    },
+    {
+    "type"   : "shell",
+    "scripts": [ "{{user `scripts_dir`}}{{user `install_script`}}" ]
+    }
+  ],
+  "post-processors": [
+    {
+    "type"         : "atlas",
+    "token"        : "{{user `atlas_token`}}",
+    "artifact"     : "{{user `atlas_username`}}/{{user `atlas_artifact_name`}}",
+    "artifact_type": "{{user `atlas_artifact_type`}}",
+    "metadata": {
+      "created_at": "{{timestamp}}",
+      "ami_name"  : "{{user `aws_ami_name`}}",
+      "version"   : "{{user `atlas_build_version`}}"
+    }
+  }
+  ]
+}
