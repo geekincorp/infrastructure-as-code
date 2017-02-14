@@ -3,3 +3,29 @@
 
 ## whitelist ##
 !.gitignore
+
+!packer*
+!packer/*
+
+!packer/scripts*
+!packer/scripts/*
+!packer/scripts/ubuntu*
+!packer/scripts/ubuntu/*
+!packer/scripts/ubuntu/configuration*
+!packer/scripts/ubuntu/configuration/*
+!packer/scripts/ubuntu/install*
+!packer/scripts/ubuntu/install/*
+
+!packer/templates*
+!packer/templates/*
+!packer/templates/base*
+!packer/templates/base/*
+!packer/templates/base/ubuntu16lts*
+!packer/templates/base/ubuntu16lts/*
+!packer/templates/base/ubuntu16lts/dockerhost*
+!packer/templates/base/ubuntu16lts/dockerhost/*
+
+!packer/templates/foundation*
+!packer/templates/foundation/*
+!packer/templates/foundation/ubuntu16lts*
+!packer/templates/foundation/ubuntu16lts/*
