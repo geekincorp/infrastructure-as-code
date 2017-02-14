@@ -29,8 +29,8 @@
 !packer/templates/foundation/*
 !packer/templates/foundation/ubuntu16lts*
 !packer/templates/foundation/ubuntu16lts/*
-!packer/templates/base/nginx*
-!packer/templates/base/nginx/*
+!packer/templates/base/ubuntu16lts/nginx*
+!packer/templates/base/ubuntu16lts/nginx/*
 
 !ansible*
 !ansible/*
