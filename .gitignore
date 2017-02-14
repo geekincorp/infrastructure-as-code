@@ -3,6 +3,7 @@
 
 ## whitelist ##
 !.gitignore
+!Makefile
 
 !packer*
 !packer/*
@@ -24,8 +25,14 @@
 !packer/templates/base/ubuntu16lts/*
 !packer/templates/base/ubuntu16lts/dockerhost*
 !packer/templates/base/ubuntu16lts/dockerhost/*
-
 !packer/templates/foundation*
 !packer/templates/foundation/*
 !packer/templates/foundation/ubuntu16lts*
 !packer/templates/foundation/ubuntu16lts/*
+!packer/templates/base/nginx*
+!packer/templates/base/nginx/*
+
+!ansible*
+!ansible/*
+!ansible/nginx-webserver*
+!ansible/nginx-webserver/*
