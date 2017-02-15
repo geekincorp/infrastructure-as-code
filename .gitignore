@@ -34,5 +34,7 @@
 
 !ansible*
 !ansible/*
-!ansible/nginx-webserver*
-!ansible/nginx-webserver/*
+!ansible/local*
+!ansible/local/*
+!ansible/local/nginx-webserver*
+!ansible/local/nginx-webserver/*
