@@ -7,7 +7,6 @@
 
 !packer*
 !packer/*
-
 !packer/scripts*
 !packer/scripts/*
 !packer/scripts/ubuntu*
@@ -16,7 +15,6 @@
 !packer/scripts/ubuntu/configuration/*
 !packer/scripts/ubuntu/install*
 !packer/scripts/ubuntu/install/*
-
 !packer/templates*
 !packer/templates/*
 !packer/templates/base*
@@ -25,16 +23,20 @@
 !packer/templates/base/ubuntu16lts/*
 !packer/templates/base/ubuntu16lts/dockerhost*
 !packer/templates/base/ubuntu16lts/dockerhost/*
-!packer/templates/foundation*
-!packer/templates/foundation/*
-!packer/templates/foundation/ubuntu16lts*
-!packer/templates/foundation/ubuntu16lts/*
-!packer/templates/base/ubuntu16lts/nginx*
-!packer/templates/base/ubuntu16lts/nginx/*
+!packer/templates/foundation-ami*
+!packer/templates/foundation-ami/*
+!packer/templates/foundation-ami/ubuntu16lts*
+!packer/templates/foundation-ami/ubuntu16lts/*
+!packer/templates/base/ubuntu16lts/nginx-webserver-ami*
+!packer/templates/base/ubuntu16lts/nginx-webserver-ami/*
+!packer/templates/base/ubuntu16lts/dockerhost-ami*
+!packer/templates/base/ubuntu16lts/dockerhost-ami/*
 
 !ansible*
 !ansible/*
 !ansible/local*
 !ansible/local/*
-!ansible/local/nginx-webserver*
-!ansible/local/nginx-webserver/*
+!ansible/foundation-ami*
+!ansible/foundation-ami/*
+!ansible/local/nginx-webserver-ami*
+!ansible/local/nginx-webserver-ami/*
